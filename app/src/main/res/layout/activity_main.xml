@@ -7,12 +7,369 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_account_name"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="6dp"
+        android:text="cartman"
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_account_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="12dp"
+        android:background="@color/white"
+        android:hint="Ваше имя"
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_account_name"
+        app:layout_constraintLeft_toLeftOf="@id/tv_account_name"
+        app:layout_constraintRight_toRightOf="@id/tv_account_name"
+        app:layout_constraintTop_toTopOf="@id/tv_account_name" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_listIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_list_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="12dp"
+        app:layout_constraintRight_toLeftOf="@id/iv_listIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_add_circle_outline_24"></androidx.appcompat.widget.AppCompatImageView>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_profile_photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="12dp"
+        android:src="@drawable/cartman"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_account_name" />
+
+    <TextView
+        android:id="@+id/tv_publications"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="70dp"
+        android:text="Публикац..."
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toRightOf="@id/civ_profile_photo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_account_name" />
+
+    <TextView
+        android:id="@+id/tv_number_of_publications"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="46dp"
+        android:text="13"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_publications"
+        app:layout_constraintLeft_toRightOf="@id/civ_profile_photo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_account_name" />
+
+    <TextView
+        android:id="@+id/tv_subscribes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="70dp"
+        android:text="Подписчи..."
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toRightOf="@id/tv_publications"
+        app:layout_constraintTop_toBottomOf="@+id/tv_account_name" />
+
+    <TextView
+        android:id="@+id/tv_number_of_subscribes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="46dp"
+        android:text="188"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_publications"
+        app:layout_constraintLeft_toRightOf="@id/tv_number_of_publications"
+        app:layout_constraintTop_toBottomOf="@+id/tv_account_name" />
+
+
+    <TextView
+        android:id="@+id/tv_subscriptions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="70dp"
+        android:text="Подписки"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toRightOf="@id/tv_subscribes"
+        app:layout_constraintTop_toBottomOf="@+id/tv_account_name" />
+
+    <TextView
+        android:id="@+id/tv_number_of_subscriptions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="46dp"
+        android:text="205"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_subscribes"
+        app:layout_constraintLeft_toRightOf="@id/tv_number_of_subscribes"
+        app:layout_constraintTop_toBottomOf="@+id/tv_account_name" />
+
+    <Button
+        android:id="@+id/b_settings"
+        style="@style/button"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:minHeight="0dp"
+        android:text="Редактировать профиль"
+        android:textColor="@color/black"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_weight="5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/civ_profile_photo" />
+
+    <ImageButton
+        android:id="@+id/ib_expand"
+        style="@style/image_button"
+        android:layout_width="41dp"
+        android:layout_height="34dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/b_settings"
+        app:layout_constraintLeft_toRightOf="@id/b_settings"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/b_settings"
+        app:srcCompat="@drawable/ic_baseline_expand_more_24" />
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Cartman"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/civ_profile_photo"
+        app:layout_constraintTop_toBottomOf="@id/civ_profile_photo" />
+
+    <TextView
+        android:id="@+id/tv_actuals"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Актуальное из историй"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/b_settings"
+        app:layout_constraintTop_toBottomOf="@id/b_settings" />
+
+    <TextView
+        android:id="@+id/tv_save_stories"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Сохраняйте свои лучшие истории в профиле"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_actuals"
+        app:layout_constraintTop_toBottomOf="@id/tv_actuals" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/iv_add_stories"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_save_stories"
+        app:layout_constraintTop_toBottomOf="@id/tv_save_stories"
+        app:srcCompat="@drawable/ic_baseline_add_circle_outline_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_actual_first"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_actual_second"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_add_stories"
+        app:layout_constraintTop_toTopOf="@id/iv_add_stories"
+        app:srcCompat="@drawable/ic_baseline_brightness_1_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_actual_second"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintEnd_toStartOf="@id/iv_actual_third"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_actual_first"
+        app:layout_constraintTop_toTopOf="@id/iv_add_stories"
+        app:srcCompat="@drawable/ic_baseline_brightness_1_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_actual_third"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintEnd_toStartOf="@id/iv_actual_fourth"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_actual_second"
+        app:layout_constraintTop_toTopOf="@id/iv_add_stories"
+        app:srcCompat="@drawable/ic_baseline_brightness_1_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_actual_fourth"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_actual_third"
+        app:layout_constraintTop_toTopOf="@id/iv_add_stories"
+        app:srcCompat="@drawable/ic_baseline_brightness_1_24" />
+
+    <TextView
+        android:id="@+id/tv_add"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Добавить"
+        android:textColor="@color/black"
+        android:textSize="13dp"
+        app:layout_constraintLeft_toLeftOf="@id/iv_add_stories"
+        app:layout_constraintTop_toBottomOf="@id/iv_add_stories" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/ib_list_photos"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/ib_photos_with"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_add"
+        app:srcCompat="@drawable/ic_baseline_grid_on_24" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/ib_photos_with"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ib_list_photos"
+        app:layout_constraintTop_toBottomOf="@id/tv_add"
+        app:layout_constraintTop_toTopOf="@id/ib_list_photos"
+        app:srcCompat="@drawable/ic_baseline_account_box_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_first_photo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@drawable/polotenchik"
+        app:layout_constraintEnd_toStartOf="@+id/iv_second_photo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ib_list_photos" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_second_photo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginRight="2dp"
+        android:background="@drawable/fat"
+        app:layout_constraintEnd_toStartOf="@+id/iv_third_photo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_first_photo"
+        app:layout_constraintTop_toTopOf="@+id/iv_first_photo" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_third_photo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/shlepi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_second_photo"
+        app:layout_constraintTop_toTopOf="@+id/iv_first_photo" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_fourth_photo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@drawable/together"
+        app:layout_constraintEnd_toStartOf="@+id/iv_fivth_photo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_first_photo" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_fivth_photo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginRight="2dp"
+        android:background="@drawable/token"
+        app:layout_constraintEnd_toStartOf="@+id/iv_sixth_photo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_fourth_photo"
+        app:layout_constraintTop_toTopOf="@+id/iv_fourth_photo" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_sixth_photo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/sten"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_fivth_photo"
+        app:layout_constraintTop_toTopOf="@+id/iv_fourth_photo" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:itemIconTint="@color/black"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:menu="@menu/bottom_navigation" />
 </androidx.constraintlayout.widget.ConstraintLayout>
