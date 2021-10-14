@@ -1,11 +1,9 @@
 package com.example.myapplication
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.view.drawToBitmap
 import com.example.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +20,8 @@ class MainActivity : AppCompatActivity() {
                 },
                 123
             )
-                if (intent.resolveActivity(packageManager) != null) {
-                    startActivity(intent)
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
 
             }
 
@@ -32,10 +30,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when(requestCode){
-            123 ->{
-                if(resultCode== RESULT_OK){
-                    Toast.makeText(this,"User get photo",Toast.LENGTH_SHORT).show()
+        when (requestCode) {
+            123 -> {
+                if (resultCode == RESULT_OK) {
+                    Toast.makeText(this, "User get photo", Toast.LENGTH_SHORT).show()
                     var imageUri = data?.data
                     binding.ivPhoto.setImageURI(imageUri)
                 }
