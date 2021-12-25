@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">App</string>
+    <string name="delete_all">Удалить все</string>
+    <string name="new_task">Cоздайте первую цель</string>
+    <string name="dismiss">Отмена</string>
+    <string name="seting_location">Поставить локацию</string>
+    <string name="take_time">Выбрать время</string>
+    <string name="info">Информация</string>
+    <string name="title">Название</string>
+    <string name="ok">Готово</string>
 </resources>
