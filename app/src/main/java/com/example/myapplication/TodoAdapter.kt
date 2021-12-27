@@ -17,9 +17,11 @@ class TodoAdapter(private val todoList: ArrayList<Todo>):
         private val binding: ItemTodoBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Todo) = with(binding) {
-            tvTitle.text = if (item.title!=null) item.title else "Укажите Название!"
-            tvAbout.text=if(item.description!=null) item.description else "Укажите информацию!"
-            tvDate.text=if(item.date.toString()!=null) item.date.toString() else "Укажите время!"
+            tvTitle.text = if(item.title=="Не указано") "Не указано" else item.title
+            tvAbout.text= if(item.description=="Не указано") "Не указано" else item.description
+            tvDate.text= if(item.date==null) "Не указано" else item.date.toString()
+            tvLong.text= if(item.longitude==null) "Не указано" else item.longitude.toString()
+            tvLat.text=if(item.latitude==null) "Не указано" else item.latitude.toString()
             itemView.setOnClickListener {
                 infoClickListener?.invoke(item)
             }

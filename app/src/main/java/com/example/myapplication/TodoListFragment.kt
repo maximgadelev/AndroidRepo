@@ -165,7 +165,7 @@ class TodoListFragment: Fragment() {
         when (editOrAdd) {
             1 -> {
                 with(bindingOfEditScreen) {
-                    enterTitleText.text = SpannableStringBuilder(todo?.title)
+                    tvEnterTitle.text = SpannableStringBuilder(todo?.title)
                     teEnterDescription.text = SpannableStringBuilder(todo?.description)
                     changingLongitude = todo?.longitude
                     changingLatitude = todo?.latitude
@@ -184,7 +184,7 @@ class TodoListFragment: Fragment() {
                 1 -> {
                     with(todoDataBASE.todoDao()) {
                         todo?.id?.let { it1 ->
-                            updateTitle(it1, bindingOfEditScreen.enterTitleText.text.toString())
+                            updateTitle(it1, bindingOfEditScreen.tvEnterTitle.text.toString())
                             updateDescription(
                                 it1,
                                 bindingOfEditScreen.teEnterDescription.text.toString()
@@ -198,7 +198,7 @@ class TodoListFragment: Fragment() {
                 0 -> {
                     val newTodo = Todo(
                         0,
-                        if(bindingOfEditScreen.enterTitleText.text.toString()!="") bindingOfEditScreen.enterTitleText.text.toString() else "Не указано",
+                        if(bindingOfEditScreen.tvEnterTitle.text.toString()!="") bindingOfEditScreen.tvEnterTitle.text.toString() else "Не указано",
                         if(bindingOfEditScreen.teEnterDescription.text.toString()!= "") bindingOfEditScreen.teEnterDescription.text.toString() else "Не указано",
                         if (needToChangeDate) calendar?.time else null,
                         changingLongitude,
