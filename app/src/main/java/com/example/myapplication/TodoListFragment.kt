@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.FragmentCreateTodoBinding
 import com.example.myapplication.entity.Todo
 import com.example.myapplication.databinding.FragmentTodoListBinding
+import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -226,9 +227,7 @@ class TodoListFragment: Fragment() {
             needToChangeDate = false
             changingLatitude = null
             changingLongitude = null
-            scope.launch {
-                initRecyclerView()
-            }
+            parentFragmentManager.beginTransaction().replace(R.id.container,TodoListFragment()).commit()
             alert?.dismiss()
         }
         bindingOfEditScreen.btnDismiss.setOnClickListener {
