@@ -28,12 +28,15 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 
 
 class TodoListFragment: Fragment() {
     private lateinit var binding: FragmentTodoListBinding
     private lateinit var todoDataBASE: DataBase
+    private var scope= CoroutineScope(SupervisorJob() + Dispatchers.Main)
+    private lateinit var todos:ArrayList<Todo>
     private lateinit var locationClient: FusedLocationProviderClient
     private var calendar: Calendar? = null
     private var changingLongitude: Double? = null
@@ -49,33 +52,40 @@ class TodoListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         todoDataBASE = (requireActivity() as MainActivity).todoBase
-        initRecyclerView()
+        scope.launch {
+            initRecyclerView()
+        }
         binding.bAddTodo.setOnClickListener {
             showEditOrAdd(null, 0)
         }
     }
 
-    private fun initRecyclerView() {
-        val list = todoDataBASE.todoDao().getAll() as ArrayList<Todo>
-        val decorator = DividerItemDecoration(requireContext(),RecyclerView.VERTICAL)
-        with(binding.rvTodos) {
-            layoutManager = LinearLayoutManager(context).apply {
-                orientation = RecyclerView.VERTICAL
-            }
-            addItemDecoration(decorator)
-            adapter = TodoAdapter(list).apply {
-                infoClickListener = {
-                    showEditOrAdd(it,1)
-                }
-                deleteClickListener = {
-                    todoDataBASE.todoDao().deleteTodo(it.id)
-                    initRecyclerView()
-                }
-                submitList(list)
-            }
+    private suspend fun initRecyclerView() {
+        todos = withContext(scope.coroutineContext) {
+            todoDataBASE.todoDao().getAll() as ArrayList<Todo>
         }
-        initNoTodoList()
-    }
+            val decorator = DividerItemDecoration(requireContext(),RecyclerView.VERTICAL)
+            with(binding.rvTodos) {
+                layoutManager = LinearLayoutManager(context).apply {
+                    orientation = RecyclerView.VERTICAL
+                }
+                addItemDecoration(decorator)
+                adapter = TodoAdapter(todos).apply {
+                    infoClickListener = {
+                        showEditOrAdd(it,1)
+                    }
+                    deleteClickListener = {
+                        scope.launch {
+                            todoDataBASE.todoDao().deleteTodo(it.id)
+                            initRecyclerView()
+                        }
+                    }
+                    submitList(todos)
+                }
+            }
+            initNoTodoList()
+        }
+
 
     private fun showDatePicker(bindingOfEditScreen: FragmentCreateTodoBinding) {
         calendar = Calendar.getInstance()
@@ -145,10 +155,12 @@ class TodoListFragment: Fragment() {
 
     private fun initNoTodoList() {
         with(binding) {
-            ivNoTodo.visibility =
-                if (todoDataBASE.todoDao().getAll().isNotEmpty()) View.GONE else View.VISIBLE
-            tvNoTodo.visibility =
-                if (todoDataBASE.todoDao().getAll().isNotEmpty()) View.GONE else View.VISIBLE
+            scope.launch {
+                ivNoTodo.visibility =
+                    if (todoDataBASE.todoDao().getAll().isNotEmpty()) View.GONE else View.VISIBLE
+                tvNoTodo.visibility =
+                    if (todoDataBASE.todoDao().getAll().isNotEmpty()) View.GONE else View.VISIBLE
+            }
         }
     }
 
@@ -184,14 +196,16 @@ class TodoListFragment: Fragment() {
                 1 -> {
                     with(todoDataBASE.todoDao()) {
                         todo?.id?.let { it1 ->
-                            updateTitle(it1, bindingOfEditScreen.tvEnterTitle.text.toString())
-                            updateDescription(
-                                it1,
-                                bindingOfEditScreen.teEnterDescription.text.toString()
-                            )
-                            updateDate(it1, calendar?.time)
-                            updateLongitude(it1, changingLongitude)
-                            updateLatitude(it1, changingLatitude)
+                            scope.launch {
+                                updateTitle(it1, bindingOfEditScreen.tvEnterTitle.text.toString())
+                                updateDescription(
+                                    it1,
+                                    bindingOfEditScreen.teEnterDescription.text.toString()
+                                )
+                                updateDate(it1, calendar?.time)
+                                updateLongitude(it1, changingLongitude)
+                                updateLatitude(it1, changingLatitude)
+                            }
                         }
                     }
                 }
@@ -204,13 +218,17 @@ class TodoListFragment: Fragment() {
                         changingLongitude,
                         changingLatitude
                     )
-                    todoDataBASE.todoDao().add(newTodo)
+                    scope.launch {
+                        todoDataBASE.todoDao().add(newTodo)
+                    }
                 }
             }
             needToChangeDate = false
             changingLatitude = null
             changingLongitude = null
-            initRecyclerView()
+            scope.launch {
+                initRecyclerView()
+            }
             alert?.dismiss()
         }
         bindingOfEditScreen.btnDismiss.setOnClickListener {
@@ -241,5 +259,10 @@ class TodoListFragment: Fragment() {
                     .show()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.cancel()
     }
 }

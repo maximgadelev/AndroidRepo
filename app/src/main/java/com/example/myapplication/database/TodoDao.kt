@@ -18,29 +18,29 @@ interface TodoDao {
     }
 
     @Query("SELECT * FROM todoS")
-    fun getAll(): List<Todo>
+    suspend fun getAll(): List<Todo>
 
     @Insert
-    fun add(todo: Todo)
+    suspend fun add(todo: Todo)
 
     @Query("UPDATE todoS SET title=:title WHERE (id=:id)")
-    fun updateTitle(id: Int, title: String?)
+    suspend fun updateTitle(id: Int, title: String?)
 
     @Query("UPDATE todoS SET description=:description WHERE (id=:id)")
-    fun updateDescription(id: Int, description: String?)
+    suspend fun updateDescription(id: Int, description: String?)
 
     @Query("UPDATE todoS SET date=:date WHERE (id=:id)")
-    fun updateDate(id: Int, date: Date?)
+    suspend fun updateDate(id: Int, date: Date?)
 
     @Query("UPDATE todoS SET latitude=:latitude WHERE (id=:id)")
-    fun updateLatitude(id: Int, latitude: Double?)
+    suspend fun updateLatitude(id: Int, latitude: Double?)
 
     @Query("UPDATE todoS SET longitude=:longitude WHERE (id=:id)")
-    fun updateLongitude(id: Int, longitude: Double?)
+    suspend fun updateLongitude(id: Int, longitude: Double?)
 
     @Query("DELETE FROM todoS WHERE id=:todo")
-    fun deleteTodo(todo: Int)
+    suspend fun deleteTodo(todo: Int)
 
     @Query("DELETE FROM todoS")
-    fun deleteAll()
+    suspend fun deleteAll()
 }
