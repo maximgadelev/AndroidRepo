@@ -79,6 +79,7 @@ class MusicService: Service() {
     }
     fun stopTrack(){
         mPlayer.stop();
+
     }
     fun setTrack(id: Int) {
         if (mPlayer.isPlaying) mPlayer.stop()

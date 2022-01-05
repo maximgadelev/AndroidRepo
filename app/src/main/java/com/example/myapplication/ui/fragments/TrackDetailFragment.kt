@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.Handler
 import android.os.IBinder
+import android.os.Message
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +54,7 @@ import com.example.myapplication.service.MusicService
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         createView()
     }
 
@@ -102,7 +105,7 @@ import com.example.myapplication.service.MusicService
         binding?.ivStop?.setOnClickListener{
             musicService?.stopTrack()
             showPlayButton()
-            fragmentManager?.beginTransaction()?.addToBackStack(null)?.replace(R.id.fragment_container,TrackListFragment())?.commit()
+            navigateToTheList()
             musicService?.cancelTrack()
         }
     }
@@ -129,4 +132,7 @@ import com.example.myapplication.service.MusicService
                  }
              }
          }
+     public fun navigateToTheList(){
+         parentFragmentManager.beginTransaction()?.addToBackStack(null)?.replace(R.id.fragment_container,TrackListFragment())?.commit()
+     }
 }

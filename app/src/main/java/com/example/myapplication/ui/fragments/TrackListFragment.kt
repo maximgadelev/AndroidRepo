@@ -1,5 +1,7 @@
 package com.example.myapplication.ui.fragments
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +19,7 @@ class TrackListFragment:Fragment(R.layout.fragment_track_list) {
     private var trackAdapter:TrackListAdapter?=null;
     var binding: FragmentTrackListBinding?=null;
     lateinit var track:Track
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
